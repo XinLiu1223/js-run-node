@@ -7,7 +7,7 @@ function sockMerchant(n, ar) {
   }, {});
   let result = 0;
   Object.keys(temp).map((tmpKy) => {
-    if (temp[tmpKy].length >= 2) {
+    if(temp[tmpKy].length >= 2) {
       result += parseInt(temp[tmpKy].length / 2);
     }
   });

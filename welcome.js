@@ -168,8 +168,8 @@ arr.myEach(function(word) {
 
 Array.prototype.myMap = function(callback) {
   arr = [];
-  for (var i = 0; i < this.length; i++)
-      arr.push(callback(this[i], i, this)); // arrayItem, index, arrayItself
+  for(var i = 0; i < this.length; i++)
+    arr.push(callback(this[i], i, this)); // arrayItem, index, arrayItself
   return arr;
 };
 
@@ -193,11 +193,11 @@ console.log(squareRoot);
 
 Array.prototype.myReduce = function(callback, initialVal) {
   var accumulator = initialVal ? initialVal : undefined;
-  for (var i = 0; i < this.length; i++) {
-      if (accumulator !== undefined)
-          accumulator = callback.call(undefined, accumulator, this[i], i, this);
-      else
-          accumulator = this[i]; // it is to assign the First Item value of array to accum
+  for(var i = 0; i < this.length; i++) {
+    if(accumulator !== undefined)
+      accumulator = callback.call(undefined, accumulator, this[i], i, this);
+    else
+      accumulator = this[i]; // it is to assign the First Item value of array to accum
   }
   return accumulator;
 };
@@ -308,3 +308,15 @@ myWriteStrm.on('finish', () => {
 
 // using pipe
 // myReadStrm.pipe(myWriteStrm);
+
+// json test
+const testObj = {
+    name: 'Xin',
+    job: 'Developer'
+};
+
+// let jsonStr = JSON.stringify(testObj);
+// console.log('json string: ' + jsonStr);
+
+JSON.parse(JSON.stringify(testObj));
+// console.log('json obj: ' + jsonObj);
