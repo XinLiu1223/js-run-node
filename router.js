@@ -3,6 +3,9 @@ const fs = require('fs');
 const route = (handle, path, response) => {
   console.log('server received request at url: ' + path);
 
+  // the handle is the obj reference of the 3 callback function
+  // so, whatever the function passes in the function reference
+  // as param, this function is called callback!
   if(typeof handle[path] === 'function') {
     handle[path](response);
   } else {
