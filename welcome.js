@@ -168,8 +168,8 @@ arr.myEach(function(word) {
 
 Array.prototype.myMap = function(callback) {
   arr = [];
-  for (var i = 0; i < this.length; i++)
-      arr.push(callback(this[i], i, this)); // arrayItem, index, arrayItself
+  for(var i = 0; i < this.length; i++)
+    arr.push(callback(this[i], i, this)); // arrayItem, index, arrayItself
   return arr;
 };
 
@@ -193,11 +193,11 @@ console.log(squareRoot);
 
 Array.prototype.myReduce = function(callback, initialVal) {
   var accumulator = initialVal ? initialVal : undefined;
-  for (var i = 0; i < this.length; i++) {
-      if (accumulator !== undefined)
-          accumulator = callback.call(undefined, accumulator, this[i], i, this);
-      else
-          accumulator = this[i]; // it is to assign the First Item value of array to accum
+  for(var i = 0; i < this.length; i++) {
+    if(accumulator !== undefined)
+      accumulator = callback.call(undefined, accumulator, this[i], i, this);
+    else
+      accumulator = this[i]; // it is to assign the First Item value of array to accum
   }
   return accumulator;
 };
@@ -217,3 +217,106 @@ var flattened = [
   return a.concat(b);
 });
 console.log(flattened); //[ 0, 1, 2, 3, 4, 5 ]
+
+
+// the following will begin on node
+const events = require('events');
+const util = require('util');
+
+const Person = function(name) {
+  this.name = name;
+}
+
+// this line is the important inheritance oop
+// so can use the properties of parent class
+// in this example is the on, emit of EventEmitter
+util.inherits(Person, events.EventEmitter);
+
+const xiaoming = new Person('xiaoming');
+const lili = new Person('lili');
+const xin = new Person('xin');
+
+const persons = [xiaoming, lili, xin];
+
+persons.forEach((person) => {
+  person.on('speak', (message) => {
+    console.log(person.name + ' said: ' + message);
+  });
+});
+
+xin.emit('speak', 'I will make a curry function');
+
+const myEmitter = new events.EventEmitter();
+
+myEmitter.on('someEvent', (message) => {
+  console.log(message);
+});
+
+myEmitter.emit('someEvent', 'test events');
+
+
+// read file I/O Async
+const fs = require('fs');
+
+// readFile is Async
+const readMe = fs.readFile('README.md', 'utf8', (err, data) => {
+  // will console log undefined because of async not getting data yet
+  console.log(data);
+  // if (data !== undefined) {
+  //   console.log(data);
+  // }
+});
+
+console.log(readMe);
+console.log('finished');
+
+// the callback hell ?
+fs.mkdir('stuff', () => {
+  fs.readFile('README.md', (err, data) => {
+    fs.writeFile('./stuff/writeMe.txt', data, () => {
+      console.log('write file success');
+    });
+  });
+});
+
+// pipe stream
+const myReadStrm = fs.createReadStream(__dirname + '/README.md'); // , 'utf8' without utf8 will output buffer
+myReadStrm.setEncoding('utf8');
+
+let data = '';
+
+// data is the node built in event
+myReadStrm.on('data', (chunk) => {
+  data += chunk;
+});
+
+// end is the node built in event
+myReadStrm.on('end', () => {
+  console.log('-Here Output Data: \n' + data);
+});
+
+// write Stream
+const myWriteStrm = fs.createWriteStream(__dirname + '/writeMe.txt');
+
+let writeDate = 'Hello World';
+myWriteStrm.write(writeDate, 'utf8');
+myWriteStrm.end();
+// finish is the node built in event
+myWriteStrm.on('finish', () => {
+  console.log('write stream success');
+});
+
+// using pipe
+// myReadStrm.pipe(myWriteStrm);
+
+// json test
+const testObj = {
+    name: 'Xin',
+    job: 'Developer'
+};
+
+// let jsonStr = JSON.stringify(testObj);
+// console.log('json string: ' + jsonStr);
+
+JSON.parse(JSON.stringify(testObj));
+// console.log('json obj: ' + jsonObj);
