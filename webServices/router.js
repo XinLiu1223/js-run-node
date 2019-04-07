@@ -13,7 +13,7 @@ const route = (handle, path, response) => {
     // response.writeHead(200, { 'Content-Type': 'text/plant' });
     // response.write('Page not Found');
     response.writeHead(200, { 'Content-Type': 'text/html' });
-    const myReadStrm = fs.createReadStream(__dirname + '/error.html', 'utf8');
+    const myReadStrm = fs.createReadStream(__dirname + '/responseView/error.html', 'utf8');
     myReadStrm.pipe(response);
   }
 }
