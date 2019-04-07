@@ -1,7 +1,8 @@
-const server = require('./smplWeb');
-const router = require('./router');
-const handler = require('./routerRespHandler');
+const server = require('./webServices/smplWeb');
+const router = require('./webServices/router');
+const handler = require('./webServices/routerRespHandler');
 
+// services API
 let handle = {};
 handle['/'] = handler.index;
 handle['/index'] = handler.index;

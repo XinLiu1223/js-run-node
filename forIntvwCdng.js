@@ -15,3 +15,24 @@ function sockMerchant(n, ar) {
 }
 
 console.log(sockMerchant(18, [8, 8, 8, 8, 8, 8, 5, 1, 2, 3, 3, 3, 3, 6, 6, 6, 6, 6]));
+
+// let a = 0;
+// a = 1 % 3;
+// console.log(a);
+(function () {
+  var foo = 1;
+
+  function bar() {
+    var foo = 2;
+  }
+
+  bar();
+
+  console.log(foo); //outputs? 2
+
+  if (true) {
+    var foo = 3;
+  }
+
+  console.log(foo); //outputs? 3
+})();
