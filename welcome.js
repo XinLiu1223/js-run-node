@@ -270,6 +270,29 @@ persons.forEach((person) => {
   };
   return clo();
 });
+// more importantly，closure is to return an executing
+// function inside the outer function,
+// it's the same with doing serial api calls chaining
+// in axios .then，which is to return the callback of
+// the chaining serial next api call in .then method
+
+/**
+
+axios
+  .get('https://maps.googleapis.com/maps/api/geocode/json?&address=' + this.props.p1')
+  .then(response => {
+    this.setState({ p1Location: response.data });
+    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?&address=' + this.props.p2');
+  })
+  .then(response => {
+    this.setState({ p2Location: response.data });
+    return axios.get('https://maps.googleapis.com/maps/api/geocode/json?&address=' + this.props.p3');
+  })
+  .then(response => {
+    this.setState({ p3Location: response.data });
+  }).catch(error => console.log(error.response));
+
+*/
 
 xin.emit('speak');
 
