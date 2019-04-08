@@ -8,9 +8,9 @@
             "type": "node",
             "request": "launch",
             "name": "Launch against Node",
-            // "program": "${workspaceFolder}\\welcome.js",
+            "program": "${workspaceFolder}\\welcome.js"
             // "program": "${workspaceFolder}\\smplWeb.js",
-            "program": "${workspaceFolder}\\forIntvwCdng.js"
+            // "program": "${workspaceFolder}\\forIntvwCdng.js"
         }
     ]
 }

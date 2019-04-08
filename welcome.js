@@ -238,13 +238,51 @@ const xin = new Person('xin');
 
 const persons = [xiaoming, lili, xin];
 
-persons.forEach((person) => {
-  person.on('speak', (message) => {
-    console.log(person.name + ' said: ' + message);
+// this is the curry function
+// need to check the relationship between
+// curry function and closure
+/**
+  persons.forEach((person) => {
+    person.on('speak', (message) => {
+      console.log(person.name + ' said: ' + message);
+    });
   });
+*/
+
+// curry plus setting a private variable = closure
+// add private variables in curry function = closure
+const speak = (first, last) => {
+  const parent= "beautiful";
+  const clo = () => `${first} ${parent} ${last}`;
+  return clo();
+};
+speak("Hello", "World");
+console.log(speak("Hello", "World"));
+// returns Hello beautiful World
+
+// so change the person.forEach to closure is as followings
+persons.forEach((person) => {
+  const parentText = 'curry func add seting private = closure';
+  const clo = () => {
+    person.on('speak', () => {
+      console.log(person.name + ' said: ' + `${parentText}`);
+    });
+  };
+  return clo();
 });
 
-xin.emit('speak', 'I will make a curry function');
+xin.emit('speak');
+
+// we can call a curry function in 2 ways:
+// 1. directly call curry(a, b) as the below xin.emit('x', 'a');
+// 2. const a = curry(a); which will return the inner func
+// then call  a(b);
+// 3. curry(a)(b);
+/**
+  xin.emit('speak', 'I will make a curry function');
+*/
+// where is my curry function ?
+
 
 const myEmitter = new events.EventEmitter();
 
@@ -261,14 +299,15 @@ const fs = require('fs');
 // readFile is Async
 const readMe = fs.readFile('README.md', 'utf8', (err, data) => {
   // will console log undefined because of async not getting data yet
-  console.log(data);
+  console.log('Below is the readFile data: \n' + data);
   // if (data !== undefined) {
   //   console.log(data);
   // }
 });
 
 console.log(readMe);
-console.log('finished');
+console.log('it is just the main thread execution finished \n'
+  + 'not the real Async readFile getting data finished');
 
 // the callback hell ?
 fs.mkdir('stuff', () => {
@@ -292,7 +331,7 @@ myReadStrm.on('data', (chunk) => {
 
 // end is the node built in event
 myReadStrm.on('end', () => {
-  console.log('-Here Output Data: \n' + data);
+  console.log('Below is the pipe Stream data: \n' + data);
 });
 
 // write Stream
