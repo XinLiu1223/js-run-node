@@ -1,25 +1,27 @@
 // Complete the sockMerchant function below.
 function sockMerchant(n, ar) {
   let temp = {};
-  temp = ar.reduce(function (rv, x) {
+  temp = ar.reduce(function(rv, x) {
     (rv[x] = rv[x] || []).push(x);
     return rv;
   }, {});
   let result = 0;
-  Object.keys(temp).map((tmpKy) => {
-    if(temp[tmpKy].length >= 2) {
+  Object.keys(temp).map(tmpKy => {
+    if (temp[tmpKy].length >= 2) {
       result += parseInt(temp[tmpKy].length / 2);
     }
   });
   return result;
 }
 
-console.log(sockMerchant(18, [8, 8, 8, 8, 8, 8, 5, 1, 2, 3, 3, 3, 3, 6, 6, 6, 6, 6]));
+console.log(
+  sockMerchant(18, [8, 8, 8, 8, 8, 8, 5, 1, 2, 3, 3, 3, 3, 6, 6, 6, 6, 6])
+);
 
 // let a = 0;
 // a = 1 % 3;
 // console.log(a);
-(function () {
+(function() {
   var foo = 1;
 
   function bar() {
@@ -36,3 +38,29 @@ console.log(sockMerchant(18, [8, 8, 8, 8, 8, 8, 5, 1, 2, 3, 3, 3, 3, 6, 6, 6, 6,
 
   console.log(foo); //outputs? 3
 })();
+
+// class Inheritance
+class Animal {
+  constructor(name, color) {
+    this.name = name;
+    this.color = color;
+  }
+
+  hello() {
+    return "name: " + this.name + ", color: " + this.color;
+  }
+}
+
+class Cat extends Animal {
+  constructor(name, color, action) {
+    super(name, color);
+    this.action = action;
+  }
+
+  hello() {
+    return super.hello() + ", say: " + this.action;
+  }
+}
+
+const cat = new Cat("sunny", "white", "meow");
+console.log(cat.hello());
