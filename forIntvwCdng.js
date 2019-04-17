@@ -64,3 +64,17 @@ class Cat extends Animal {
 
 const cat = new Cat("sunny", "white", "meow");
 console.log(cat.hello());
+
+let state = [];
+const courseObjA = { title: "A" };
+const courseObjB = { title: "B" };
+const newStateA = [...state, { ...courseObjA }];
+console.log("test spread add obj to array: " + newStateA[0].title);
+const newStateB = [...newStateA, { ...courseObjB }];
+console.log("test spread add obj to array: " + newStateB[0].title);
+console.log("test spread add obj to array: " + newStateB[1].title);
+
+// spread means spread and copy, the same with the followings
+var arr1 = [0, 1, 2];
+var arr2 = [3, 4, 5];
+arr1 = [...arr2, ...arr1];
