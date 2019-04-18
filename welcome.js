@@ -87,58 +87,120 @@ console.log(cylinder.volume.call({ pi: 3.14156 }, 2, 6));
 console.log(cylinder.volume.apply({ pi: 3.14156 }, [2, 6]));
 
 // callback
-function callFunc(callback, name) {
+// function callFunc(callback, name) {
+//   callback(name);
+// }
+const callFunc = (callback, name) => {
   callback(name);
-}
+};
 
 // const sayHello = function(name) {
+//   console.log(name + ' says Hello');
+// };
+// const sayHello = (name) => {
 //   console.log(name + ' says Hello');
 // };
 
 // callFunc(sayHello, 'Xin');
-callFunc(function(name) {
+
+callFunc(name => {
   console.log(name + " says Hello");
 }, "Xin");
-// const callFunc = function(callback, name) {
-//   callback(name);
-// };
 
 // callback by this - global obj, no param pass in callback
-GlobalObj.prototype.callFuncA = function(callback) {
+GlobalObjA.prototype.callFuncA = function(callback) {
   callback(this.nameA);
 };
 
-function GlobalObj() {
-  this.nameA = "Xin Liu";
+function GlobalObjA(name) {
+  this.nameA = name;
 }
+
+const globalObjA = new GlobalObjA("Xin Liu");
 
 // const sayHello = function(name) {
 //   console.log(name + ' says Hello');
 // };
-
-const globalObj = new GlobalObj();
+// const sayHello = (name) => {
+//   console.log(name + ' says Hello');
+// };
 
 // globalObj.callFuncA(sayHello);
-globalObj.callFuncA(function(name) {
+
+globalObjA.callFuncA(name => {
   console.log(name + " says Hello");
 });
 
 // ES6 Class
-class GlobalObjA {
+class GlobalObjB {
   constructor(name) {
     // super();
-    this.nameA = name;
+    this.nameB = name;
   }
-  callFuncA(callback) {
-    callback(this.nameA);
+  callFuncB(callback) {
+    callback(this.nameB);
   }
 }
 
-const globalObjA = new GlobalObjA("Mr. Xin Liu");
+const globalObjB = new GlobalObjB("Mr. Xin Liu");
 
-globalObjA.callFuncA(function(name) {
+globalObjB.callFuncB(name => {
   console.log(name + " says Hello");
 });
+
+// react HOC is used to pass in some additional common function, which
+// is the callback fucntion, and call them in react HOC,
+// that means the react HOC is basically to implement the function to accept
+// the callback function as a passin param, which is similar to the
+// callFunc, callFuncA, callFuncB shown above
+/*
+
+const CommentListWithSubscription = withSubscription(
+  CommentList,
+  (DataSource) => DataSource.getComments()
+);
+
+const BlogPostWithSubscription = withSubscription(
+  BlogPost,
+  (DataSource, props) => DataSource.getBlogPost(props.id)
+);
+
+
+function withSubscription(WrappedComponent, selectData) {
+  // ...and returns another component...
+  return class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.handleChange = this.handleChange.bind(this);
+      this.state = {
+        data: selectData(DataSource, props)
+      };
+    }
+
+    componentDidMount() {
+      // ... that takes care of the subscription...
+      DataSource.addChangeListener(this.handleChange);
+    }
+
+    componentWillUnmount() {
+      DataSource.removeChangeListener(this.handleChange);
+    }
+
+    handleChange() {
+      this.setState({
+        data: selectData(DataSource, this.props)
+      });
+    }
+
+    render() {
+      // ... and renders the wrapped component with the fresh data!
+      // Notice that we pass through any additional props
+      return <WrappedComponent data={this.state.data} {...this.props} />;
+    }
+  };
+}
+
+*/
 
 // the following is my thought of how array Map callback implemented
 // which is correct, the code is from
