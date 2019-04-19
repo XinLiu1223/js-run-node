@@ -288,7 +288,12 @@ const persons = [xiaoming, lili, xin];
 // this is the curry function
 // need to check the relationship between
 // curry function and closure
+
 /**
+  // this is not related to the curry or closure
+  // it's 2 callbacks forEach pass in the (person)=>
+  // first callback, then in person.on pass in the (message)=>
+  // second callback
   persons.forEach((person) => {
     person.on('speak', (message) => {
       console.log(person.name + ' said: ' + message);
@@ -322,6 +327,13 @@ persons.forEach(person => {
 // it's the same with doing serial api calls chaining
 // in axios .then，which is to return the callback of
 // the chaining serial next api call in .then method
+
+// the above analyze is not that exactly
+// so, closure means the inner function can access the variable
+// inside the outter function, and return an executed function
+// to make the variable inside the outter function to be private
+// but the curry function just returns a function, not
+// return an executed function
 
 /**
 
