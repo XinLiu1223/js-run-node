@@ -78,3 +78,12 @@ console.log("test spread add obj to array: " + newStateB[1].title);
 var arr1 = [0, 1, 2];
 var arr2 = [3, 4, 5];
 arr1 = [...arr2, ...arr1];
+
+// test some recursive function
+const factorial = n => {
+  if (n === 0) return 1;
+  else return n * factorial(n - 1);
+};
+
+const recursResult = factorial(4);
+console.log("the recursive: " + recursResult);
