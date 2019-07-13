@@ -1,0 +1,26 @@
+{
+  "name": "js-run-node",
+  "version": "1.0.0",
+  "description": "for coding and testing",
+  "main": "startService.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon startService.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XinLiu1223/js-run-node.git"
+  },
+  "author": "Xin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XinLiu1223/js-run-node/issues"
+  },
+  "homepage": "https://github.com/XinLiu1223/js-run-node#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0"
+  }
+}
